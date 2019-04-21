@@ -23,6 +23,8 @@ public class SocketServer {
 				while((len=inputStream.read(data))!=-1) {
 					System.out.println(new String(data,0,len));
 				}
+				
+				
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

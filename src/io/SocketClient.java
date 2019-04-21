@@ -14,8 +14,10 @@ public class SocketClient {
 			while (true) {
 				OutputStream out = client.getOutputStream();
 				out.write((new Date()+" Hello world!").getBytes());
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			}
+			
+		
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
