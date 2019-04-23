@@ -22,23 +22,22 @@ public class MultiPortEcho {
 	public void run() throws IOException {
 		Selector selector = Selector.open();
 		ServerSocketChannel serverSocketChannel;
-		ServerSocket ss;
 		System.out.println(ports[0]);
 		for (int i = 0; i < ports.length; i++) {
 			serverSocketChannel = ServerSocketChannel.open();
 			serverSocketChannel.configureBlocking(false);
 			InetSocketAddress address = new InetSocketAddress(ports[i]);
-			SelectionKey key = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-
-			ss = serverSocketChannel.socket();
-			ss.bind(address);
+			serverSocketChannel.socket().bind(address);
+			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 		}
 
 		while (true) {
-			int num = selector.select();
+			if (selector.select(1) < 1) {
+				continue;
+			}
 
-			Set selectedKeys = selector.selectedKeys();
-			Iterator it = selectedKeys.iterator();
+			Set<SelectionKey> SelectionKeys = selector.selectedKeys();
+			Iterator<SelectionKey> it = SelectionKeys.iterator();
 
 			while (it.hasNext()) {
 				SelectionKey key = (SelectionKey) it.next();
@@ -50,7 +49,7 @@ public class MultiPortEcho {
 					sc.configureBlocking(false);
 
 					// Add the new connection to the selector
-					SelectionKey newKey = sc.register(selector, SelectionKey.OP_READ);
+					sc.register(selector, SelectionKey.OP_READ);
 					it.remove();
 
 					System.out.println("Got connection from " + sc);
@@ -62,7 +61,6 @@ public class MultiPortEcho {
 					int bytesEchoed = 0;
 					while (true) {
 						buffer.clear();
-
 						int r = sc.read(buffer);
 
 						if (r <= 0) {
@@ -70,7 +68,6 @@ public class MultiPortEcho {
 						}
 
 						buffer.flip();
-
 						sc.write(buffer);
 						bytesEchoed += r;
 					}
@@ -86,7 +83,7 @@ public class MultiPortEcho {
 
 	static public void main(String args[]) throws Exception {
 		int ports[] = { 10000, 10001, 10002 };
-		MultiPortEcho mpe=new MultiPortEcho(ports);
+		MultiPortEcho mpe = new MultiPortEcho(ports);
 		mpe.run();
 	}
 

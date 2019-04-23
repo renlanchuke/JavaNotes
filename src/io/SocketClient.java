@@ -17,9 +17,8 @@ public class SocketClient {
 				Thread.sleep(5000);
 			}
 			
-		
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
 		}
 	}
 	
