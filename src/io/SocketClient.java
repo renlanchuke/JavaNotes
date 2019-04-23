@@ -25,6 +25,6 @@ public class SocketClient {
 	
 	public static void main(String[] args) throws InterruptedException {
 		SocketClient sc=new SocketClient();
-		sc.run(18888);
+		sc.run(10000);
 	}
 }
