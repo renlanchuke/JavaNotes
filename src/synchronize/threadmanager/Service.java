@@ -1,6 +1,6 @@
 package synchronize.threadmanager;
 
 public interface Service {
-	public void sayHello();
+	public void sayHello() throws InterruptedException;
 
 }

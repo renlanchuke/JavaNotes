@@ -6,7 +6,12 @@ public class Client {
 	}
 
 	public void requestService() {
-		service.sayHello();
+		try {
+			service.sayHello();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private Service service;

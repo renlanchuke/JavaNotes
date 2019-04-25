@@ -8,7 +8,12 @@ class SayHello implements MethodRequest {
 	}
 
 	public void call() {
-		service.sayHello();
+		try {
+			service.sayHello();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
