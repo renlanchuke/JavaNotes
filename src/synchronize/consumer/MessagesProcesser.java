@@ -6,7 +6,7 @@ class MessagesProcesser {
 	// capabilities for the MessagesProcessor
 	private Consumer consumer = new Consumer() {
 		// that method is called on each event retrieved
-		protected void onConsume(String s) {
+		protected void onConsume(String s){
 			MessagesProcesser.this.processMessage(s);
 		}
 	}.setName("MessagesProcessor").init();
@@ -16,10 +16,11 @@ class MessagesProcesser {
 	}
 
 	private void processMessage(String s) {
+//		Thread.sleep(10000);
 		System.out.println(name + " processed message: " + s);
 	}
 
-	private void terminate() throws InterruptedException {
+	public void terminate() throws InterruptedException {
 		consumer.terminateWait();
 		name = null;
 	}

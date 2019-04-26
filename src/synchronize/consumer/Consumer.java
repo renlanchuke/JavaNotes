@@ -1,17 +1,25 @@
 package synchronize.consumer;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 
 public abstract class Consumer {
 	private Thread thread;
 	private Object waitForJobsMonitor;
 	private Deque<String> queue;
-	private volatile Boolean isTerminated=false;
+	private volatile Boolean isTerminated = false;
 	private String name;
 
+	public String getName() {
+		return name;
+	}
+
 	public Consumer init() {
-		thread=getThread();
+		waitForJobsMonitor = new Object();
+		queue = new ArrayDeque<String>();
+		thread = getThread();
 		thread.start();
+		System.out.println(name+" is starting ...");
 		return this;
 	}
 
@@ -19,6 +27,7 @@ public abstract class Consumer {
 		if (thread == null) {
 			thread = new Thread() {
 				public void run() {
+
 					Consumer.this.run();
 				}
 			};
@@ -77,12 +86,15 @@ public abstract class Consumer {
 
 	public void terminateWait() throws InterruptedException {
 		terminate();
-		while(!thread.isAlive()) {
-			Thread.sleep(100);
+		while (thread.isAlive()) {
+			System.out.println(name+" is stoping ...");
+//			Thread.sleep(100);
 		}
+		
+		System.out.println(thread.isAlive());
 	}
 
-	private void terminate() {
+	protected void terminate() {
 		isTerminated = true;
 	}
 }

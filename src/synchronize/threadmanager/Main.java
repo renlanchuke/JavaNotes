@@ -10,10 +10,10 @@ public class Main {
 //		}
 		
 		
-		for(int j=0;j<5;j++) {
-			Client c2=new Client(new ServiceProxy());
-			c2.requestService();
-		}
+//		for(int j=0;j<5;j++) {
+//			Client c2=new Client(new ServiceProxy());
+//			c2.requestService();
+//		}
 		
 	}
 }
