@@ -92,7 +92,7 @@ public class ThreadPool {
 		while (!workThreadVector.isEmpty()) {
 
 			try {
-				Worker workThread = (Worker) workThreadVector.remove(0);
+				Worker workThread =  workThreadVector.remove(0);
 				workThread.closeThread();
 				continue;
 			} catch (Exception exception) {
