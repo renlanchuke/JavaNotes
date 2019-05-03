@@ -9,13 +9,12 @@ public class Main {
 	int debug = 2;
 
 	public Main(int threadPoolSize, int jobsNum) {
-		// System.out.println("size: "+sizeOfThreadPool+" jobs: "+jobsNumber);
 		sizeOfThreadPool = threadPoolSize;
 		jobsNumber = jobsNum;
 		long timeNoPool = 0;
 		long timePool = 0;
 		count = 0;
-		System.err.println("Begin of testing strategy -- no pool");
+		System.out.println("Begin of testing strategy -- no pool");
 		long start = System.currentTimeMillis();
 		try {
 			for (int i = 0; i < jobsNumber; i++) {
@@ -32,14 +31,12 @@ public class Main {
 		if (debug > 3)
 			System.out.println("no pool time:" + (System.currentTimeMillis() - start));
 		timeNoPool = System.currentTimeMillis() - start;
-		System.err.println("End of no pool test");
+		System.out.println("End of no pool test");
 		count = 0;
-		// start = System.currentTimeMillis();
-		System.err.println("Begin of  creating pool");
+		System.out.println("Begin of  creating pool");
 		threadPool = new ThreadPool(sizeOfThreadPool);
-		System.err.println("End of  creating pool");
-		System.err.println("Begin of testing the strategy  -- pool");
-		// without the time for creating pool
+		System.out.println("End of  creating pool");
+		System.out.println("Begin of testing the strategy  -- pool");
 		start = System.currentTimeMillis();
 		try {
 			for (int i = 0; i < jobsNumber; i++) {
@@ -56,7 +53,7 @@ public class Main {
 		if (debug > 3)
 			System.out.println("pool time:" + (System.currentTimeMillis() - start));
 		timePool = System.currentTimeMillis() - start;
-		System.err.println("End of thread pool test");
+		System.out.println("End of thread pool test");
 		System.out.println("without pool: " + timeNoPool + "    with pool: " + timePool);
 
 		System.exit(0);
@@ -80,18 +77,6 @@ public class Main {
 	public static void main(String[] args) {
 		int poolSize = 20;
 		int jobs = 200;
-
-		if (args.length < 2) {
-			System.err.println("Usage: java TestThreadPool " + "<Size of ThreadPool> <jobs> ");
-			System.exit(-1);
-		}
-		try {
-			poolSize = Integer.parseInt(args[0]);
-			jobs = Integer.parseInt(args[1]);
-		} catch (Exception ex) {
-			System.out.println("Please input integer.");
-			System.exit(-1);
-		}
 		new Main(poolSize, jobs);
 	}
 
@@ -103,49 +88,31 @@ public class Main {
 		}
 
 		public void setEnd(boolean flag) {
-			/** @todo: Implement this Task method */
-			// throw new java.lang.UnsupportedOperationException("Method setEnd() not yet
-			// implemented.");
 			isEnd = flag;
 		}
 
 		public void run() {
 			int i = 1;
 			int r = 1;
-
-			// System.err.println("r:"+r);
 			try {
-				// you can change this line to simulate something
 				for (int ii = 0; ii < 100; ii++)
 					r = r + i * i;
 			} catch (Exception ex) {
 			}
 			synchronized (testlock) {
 				count++;
-
 			}
 
 		}
 
 		public void startTask() throws Exception {
-			/** @todo: Implement this Task method */
-			// throw new java.lang.UnsupportedOperationException("Method startTask() not yet
-			// implemented.");
-			// System.err.print("use pool");
 			run();
 		}
 
 		public void endTask() throws Exception {
-			/** @todo: Implement this Task method */
-			// throw new java.lang.UnsupportedOperationException("Method endTask() not yet
-			// implemented.");
-			// free resource here
 		}
 
 		public boolean isEnd() {
-			/** @todo: Implement this Task method */
-			// throw new java.lang.UnsupportedOperationException("Method isEnd() not yet
-			// implemented.");
 			return isEnd;
 		}
 	}
