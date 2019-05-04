@@ -17,7 +17,7 @@ public class Main {
 //				}
 //				SingletonTest singletonTest = SingletonTest.getInstance();
 				
-				SingletonConfig config=SingletonConfig.getInstance();
+				SingletonConfig2 config=SingletonConfig2.getInstance();
 				
 			}).start();
 		}
