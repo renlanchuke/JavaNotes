@@ -2,7 +2,10 @@ package jvm;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * -Xms500m -Xmx500m -XX:+UseSerialGC
+ *  throw OutOfMemoryError
+ */
 public class FillHeap {
 	static class OOMObject{
 		public byte[] placeholder=new byte[640*1024];
@@ -14,10 +17,11 @@ public class FillHeap {
 			Thread.sleep(50);
 			list.add(new OOMObject());
 		}
-		System.gc();
+		
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
 		fillHeap(1000);
+		System.gc();
 	}
 }
