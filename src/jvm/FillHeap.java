@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * -Xms500m -Xmx500m -XX:+UseSerialGC
  *  throw OutOfMemoryError
+ *  using jconsole to mnoitor memory state 
  */
 public class FillHeap {
 	static class OOMObject{
